@@ -2,8 +2,8 @@ import { Codicon, ConfirmDialog, ColorSwatches, PROFILE_SWATCHES, host, ROUTES_A
 import { useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
-const ACCENT_BLUE = 'var(--theme-primary)'
-const HOVER_GLOW = `0 0 8px color-mix(in srgb, ${ACCENT_BLUE} 40%, transparent)`
+const ACCENT_COLOR = 'var(--theme-primary)'
+const HOVER_GLOW = `0 0 8px color-mix(in srgb, ${ACCENT_COLOR} 40%, transparent)`
 const CARD_TITLE_COLOR = '#000000'
 const CARD_CHAT_COLOR = '#222222'
 const VIEW_CONTROL_COLOR = '#1f2937'
@@ -139,7 +139,7 @@ const controlStyle = {
 
 const pageArrowStyle = {
   ...controlStyle, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-  padding: '2px 4px', background: ACCENT_BLUE, borderColor: ACCENT_BLUE, color: '#ffffff'
+  padding: '2px 4px', background: ACCENT_COLOR, borderColor: ACCENT_COLOR, color: '#ffffff'
 }
 const popupStyle = {
   borderRadius: '12px', background: 'var(--ui-bg-editor)',
@@ -152,7 +152,7 @@ const dropdownStyle = {
 }
 const createButtonStyle = {
   ...controlStyle, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-  padding: '6px', color: '#ffffff', background: ACCENT_BLUE, borderColor: ACCENT_BLUE
+  padding: '6px', color: '#ffffff', background: ACCENT_COLOR, borderColor: ACCENT_COLOR
 }
 const cancelButtonStyle = { ...controlStyle, display: 'inline-flex', padding: '6px' }
 const deleteButtonStyle = { ...controlStyle, color: DELETE_COLOR, borderColor: DELETE_COLOR }
@@ -350,7 +350,7 @@ function CardActions({ session, profile, onChanged, onAssignFolder, color, onCol
               paletteOpen && jsx('div', {
                 ref: paletteRef,
                 role: 'group', 'aria-label': 'Appearance colors',
-                style: { position: 'fixed', left: palettePosition?.left ?? 8, top: palettePosition?.top ?? 8, visibility: palettePosition ? 'visible' : 'hidden', width: '184px', maxWidth: 'calc(100vw - 16px)', maxHeight: 'calc(100vh - 16px)', overflowY: 'auto', boxSizing: 'border-box', padding: '10px', zIndex: 1000, borderRadius: '8px', background: 'var(--ui-bg-editor)', border: '1px solid ' + ACCENT_BLUE },
+                style: { position: 'fixed', left: palettePosition?.left ?? 8, top: palettePosition?.top ?? 8, visibility: palettePosition ? 'visible' : 'hidden', width: '184px', maxWidth: 'calc(100vw - 16px)', maxHeight: 'calc(100vh - 16px)', overflowY: 'auto', boxSizing: 'border-box', padding: '10px', zIndex: 1000, borderRadius: '8px', background: 'var(--ui-bg-editor)', border: '1px solid ' + ACCENT_COLOR },
                 children: jsx(ColorSwatches, {
                   swatches: PROFILE_SWATCHES, value: color, clearLabel: 'No color',
                   swatchLabel: value => 'Set color ' + value,
@@ -398,7 +398,7 @@ function CardActions({ session, profile, onChanged, onAssignFolder, color, onCol
               open && jsxs('div', {
                 ref: folderPopupRef,
                 role: 'group', 'aria-label': 'Chat folders',
-                style: { position: 'fixed', left: folderPopupPosition?.left ?? 8, top: folderPopupPosition?.top ?? 8, visibility: folderPopupPosition ? 'visible' : 'hidden', zIndex: 1000, width: '190px', maxWidth: 'calc(100vw - 16px)', boxSizing: 'border-box', maxHeight: 'calc(100vh - 32px)', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', padding: '6px', borderRadius: '8px', background: 'var(--ui-bg-editor)', border: '1px solid ' + ACCENT_BLUE, color: 'var(--ui-text-primary)' },
+                style: { position: 'fixed', left: folderPopupPosition?.left ?? 8, top: folderPopupPosition?.top ?? 8, visibility: folderPopupPosition ? 'visible' : 'hidden', zIndex: 1000, width: '190px', maxWidth: 'calc(100vw - 16px)', boxSizing: 'border-box', maxHeight: 'calc(100vh - 32px)', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', padding: '6px', borderRadius: '8px', background: 'var(--ui-bg-editor)', border: '1px solid ' + ACCENT_COLOR, color: 'var(--ui-text-primary)' },
                 children: [
                   !newFolder && jsx('button', {
                     type: 'button', disabled: busy, style: { ...controlStyle, padding: '4px 8px', fontSize: '12px' }, children: 'New folder',
@@ -406,7 +406,7 @@ function CardActions({ session, profile, onChanged, onAssignFolder, color, onCol
                   }),
                   newFolder && jsx('section', {
                     className: 'chat-view-create-folder', 'aria-label': 'New folder',
-                    style: { position: 'relative', width: '100%', maxWidth: 'calc(100vw - 48px)', boxSizing: 'border-box', padding: '8px', boxShadow: '0 8px 24px #0002', border: '1px solid ' + ACCENT_BLUE, borderRadius: '12px', background: 'var(--ui-bg-editor)', color: VIEW_CONTROL_COLOR, fontFamily: 'var(--dt-font-sans)' },
+                    style: { position: 'relative', width: '100%', maxWidth: 'calc(100vw - 48px)', boxSizing: 'border-box', padding: '8px', boxShadow: '0 8px 24px #0002', border: '1px solid ' + ACCENT_COLOR, borderRadius: '12px', background: 'var(--ui-bg-editor)', color: VIEW_CONTROL_COLOR, fontFamily: 'var(--dt-font-sans)' },
                     children: jsx(FolderCreateForm, { name: folderName, onNameChange: setFolderName, busy, error, compact: true, onCancel: () => setNewFolder(false),
  onSubmit: event => {
                       event.preventDefault()
@@ -422,7 +422,7 @@ function CardActions({ session, profile, onChanged, onAssignFolder, color, onCol
  })
                   }),
                   !newFolder && jsx('input', {
-                    type: 'search', placeholder: 'Search folders', 'aria-label': 'Search folders', value: folderMenuSearch,
+                    type: 'search', className: 'chat-view-folder-search', placeholder: 'Search folders', 'aria-label': 'Search folders', value: folderMenuSearch,
                     style: { ...controlStyle, padding: '4px 8px', fontSize: '12px', width: '100%', boxSizing: 'border-box', minWidth: 0 },
                     onChange: event => { setFolderMenuSearch(event.target.value); setFolderMenuPage(0) }
                   }),
@@ -618,7 +618,7 @@ function ChatHistoryPage({ split = false }) {
   }, [activeById])
   const prFor = session => pullRequests.data?.pull_requests?.[session.id]
   const pageSize = PAGE_LAYOUTS.find(([value]) => value === layout)?.[1] || 8
-  const columns = pageSize === 2 ? 2 : 4
+  const columns = pageSize === 2 ? 1 : pageSize === 4 ? 2 : 4
   const scrollKey = 'scroll-' + profile + '-' + layout + '-' + page
   function changeFilter(key, value, setter) {
     setter(value)
@@ -686,6 +686,7 @@ function ChatHistoryPage({ split = false }) {
   }
 
   return jsxs('main', {
+    className: 'chat-view-root',
     style: {
       padding: '16px', height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', minHeight: 0, containerType: 'inline-size', containerName: 'chat-view',
       color: 'var(--ui-text-primary)', boxSizing: 'border-box', fontFamily: 'var(--dt-font-sans)',
@@ -834,7 +835,7 @@ jsx('button', { type: 'button', title: 'Chat View settings', className: 'chat-vi
       jsx('button', { type: 'button', style: { ...controlStyle, alignSelf: 'flex-start', marginBottom: '8px' }, onClick: () => { setCreateFolderOpen(!createFolderOpen); setCreateFolderError('') }, children: 'New folder' }),
       createFolderOpen && jsx('section', {
         className: 'chat-view-create-folder', 'aria-label': 'New folder',
-        style: { position: 'absolute', top: 'calc(100% + 8px)', left: 0, zIndex: 30, width: '260px', maxWidth: 'calc(100vw - 48px)', boxSizing: 'border-box', padding: '16px', boxShadow: '0 8px 24px #0002', border: '1px solid ' + ACCENT_BLUE, borderRadius: '12px', background: 'var(--ui-bg-editor)', color: VIEW_CONTROL_COLOR, fontFamily: 'var(--dt-font-sans)' },
+        style: { position: 'absolute', top: 'calc(100% + 8px)', left: 0, zIndex: 30, width: '260px', maxWidth: 'calc(100vw - 48px)', boxSizing: 'border-box', padding: '16px', boxShadow: '0 8px 24px #0002', border: '1px solid ' + ACCENT_COLOR, borderRadius: '12px', background: 'var(--ui-bg-editor)', color: VIEW_CONTROL_COLOR, fontFamily: 'var(--dt-font-sans)' },
         children: jsx(FolderCreateForm, { name: createFolderName, onNameChange: setCreateFolderName, busy: createFolderBusy, error: createFolderError, onCancel: () => setCreateFolderOpen(false),
  onSubmit: async event => {
           event.preventDefault()
@@ -872,7 +873,7 @@ jsx('button', { type: 'button', title: 'Chat View settings', className: 'chat-vi
               jsx('strong', { style: { color: CARD_CHAT_COLOR, fontSize: '18px', lineHeight: '1.3', overflowWrap: 'anywhere', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3, overflow: 'hidden' }, children: project.name || 'Untitled folder' }),
               jsxs('div', { onClick: event => event.stopPropagation(), onKeyDown: event => event.stopPropagation(), style: { position: 'absolute', bottom: '8px', right: '8px' }, children: [
                 jsx('button', { type: 'button', 'aria-label': 'Delete folder ' + project.name, 'aria-expanded': folderDeleteMenu === project.id, style: { ...controlStyle, padding: '4px', display: 'inline-flex', color: DELETE_COLOR, borderColor: DELETE_COLOR }, onClick: event => { folderDeleteTriggerRef.current = event.currentTarget; setFolderDeleteMenu(folderDeleteMenu === project.id ? null : project.id); setFolderDeleteError('') }, children: jsx(Codicon, { name: 'trash', size: '16px' }) }),
-                folderDeleteMenu === project.id && jsxs('div', { ref: folderDeletePopupRef, role: 'group', 'aria-label': 'Delete folder options', style: { position: 'fixed', left: folderDeletePosition?.left ?? 8, top: folderDeletePosition?.top ?? 8, visibility: folderDeletePosition ? 'visible' : 'hidden', boxSizing: 'border-box', maxHeight: 'calc(100vh - 16px)', overflowY: 'auto', width: '200px', maxWidth: 'calc(100vw - 32px)', zIndex: 40, padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px', border: '1px solid ' + ACCENT_BLUE, borderRadius: '8px', background: 'var(--ui-bg-editor)', boxShadow: '0 8px 24px #0002' }, children: [
+                folderDeleteMenu === project.id && jsxs('div', { ref: folderDeletePopupRef, role: 'group', 'aria-label': 'Delete folder options', style: { position: 'fixed', left: folderDeletePosition?.left ?? 8, top: folderDeletePosition?.top ?? 8, visibility: folderDeletePosition ? 'visible' : 'hidden', boxSizing: 'border-box', maxHeight: 'calc(100vh - 16px)', overflowY: 'auto', width: '200px', maxWidth: 'calc(100vw - 32px)', zIndex: 40, padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px', border: '1px solid ' + ACCENT_COLOR, borderRadius: '8px', background: 'var(--ui-bg-editor)', boxShadow: '0 8px 24px #0002' }, children: [
                   jsx('button', { type: 'button', style: deleteButtonStyle, disabled: folderDeleteBusy, onClick: () => prepareFolderDelete(project, true), children: 'Delete folder and chats' }),
                   jsx('button', { type: 'button', style: deleteButtonStyle, disabled: folderDeleteBusy, onClick: () => prepareFolderDelete(project, false), children: 'Delete folder, keep chats' }),
                   folderDeleteError && jsx('span', { role: 'alert', children: folderDeleteError })
@@ -915,7 +916,7 @@ jsx('button', { type: 'button', title: 'Chat View settings', className: 'chat-vi
               borderLeftColor: selectedId === session.id ? 'var(--theme-primary)' : 'var(--ui-stroke-tertiary)',
               borderTopColor: cardColor || 'var(--ui-stroke-tertiary)',
               borderRadius: '12px', background: 'var(--ui-surface-background)',
-              boxShadow: selectedId === session.id ? `0 0 0 1px color-mix(in srgb, ${ACCENT_BLUE} 30%, transparent), 0 0 10px color-mix(in srgb, ${ACCENT_BLUE} 22%, transparent)` : 'none',
+              boxShadow: selectedId === session.id ? `0 0 0 1px color-mix(in srgb, ${ACCENT_COLOR} 30%, transparent), 0 0 10px color-mix(in srgb, ${ACCENT_COLOR} 22%, transparent)` : 'none',
               color: 'var(--ui-text-primary)', cursor: 'pointer'
             },
             children: [
@@ -1018,8 +1019,18 @@ export default {
         border: 2px solid var(--card-folder-color); border-bottom: 0;
         border-radius: 8px 8px 0 0; pointer-events: none;
       }
-      .chat-view-folder-card:hover { box-shadow: ${HOVER_GLOW} !important; border-color: ${ACCENT_BLUE} !important; }
+      .chat-view-folder-card:hover { box-shadow: ${HOVER_GLOW} !important; border-color: ${ACCENT_COLOR} !important; }
       .chat-view-search::placeholder { color: ${SEARCH_PLACEHOLDER_COLOR}; opacity: 1; }
+      .chat-view-root { accent-color: ${ACCENT_COLOR}; }
+      .chat-view-create-folder input:focus,
+      .chat-view-create-folder input:focus-visible,
+      .chat-view-folder-search:focus,
+      .chat-view-folder-search:focus-visible {
+        border-color: ${ACCENT_COLOR} !important;
+        outline: none !important;
+        box-shadow: none !important;
+        caret-color: ${ACCENT_COLOR};
+      }
       .chat-view-hover-outline, .chat-view-search {
         box-sizing: border-box;
         height: ${VIEW_CONTROL_SIZE}px !important;
@@ -1036,7 +1047,7 @@ export default {
         font-size: ${VIEW_CONTROL_SIZE / 2}px !important;
         flex-shrink: 0;
       }
-      .chat-view-folder-browser[aria-pressed="true"] { border-color: ${ACCENT_BLUE} !important; }
+      .chat-view-folder-browser[aria-pressed="true"] { border-color: ${ACCENT_COLOR} !important; }
       .chat-view-pagination-bar[data-stacked="true"] { grid-template-columns: auto minmax(0, 1fr) !important; }
       .chat-view-pagination-bar[data-stacked="true"] .chat-view-folder-browser { grid-column: 1 !important; grid-row: 1; }
       .chat-view-pagination-bar[data-stacked="true"] .chat-view-pagination { grid-column: 2 !important; grid-row: 1; }
@@ -1049,11 +1060,11 @@ export default {
       .chat-view-page-arrow:hover:not(:disabled),
       .chat-view-search:hover,
       .chat-view-search:focus {
-        border-color: ${ACCENT_BLUE} !important;
+        border-color: ${ACCENT_COLOR} !important;
         box-shadow: ${HOVER_GLOW} !important;
       }
       .chat-view-close-filters:hover,
-      .chat-view-clear-filters:hover { color: ${ACCENT_BLUE} !important; }
+      .chat-view-clear-filters:hover { color: ${ACCENT_COLOR} !important; }
       .chat-view-search { transition: border-color 150ms ease, box-shadow 150ms ease; }
       .chat-view-search:focus { outline: none !important; }
       @media (prefers-reduced-motion: reduce) { .chat-view-search { transition: none; } }
