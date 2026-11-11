@@ -1,0 +1,5 @@
+﻿name: chat-view
+version: "1.0.0"
+description: Struggling to find the right session in Hermes? Struggle no longer with Chat View, a simple, reliable way to stop squinting at titles or guessing which chat you’re looking for. See your sessions in a spacious main view, with big, bold titles and message summaries that show what each chat is about at a glance.
+provides_tools: []
+provides_hooks: []
